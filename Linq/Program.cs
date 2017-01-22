@@ -11,8 +11,8 @@ namespace Linq
     {
         public static void Main(string[] args)
         {
-            //GetEmployee();
-            GetTypes();
+            GetEmployee();
+            //GetTypes();
         }
 
         private static void GetTypes()
@@ -30,7 +30,7 @@ namespace Linq
 
         private static void GetEmployee()
         {
-            IEnumerable<Employee> Data = new List<Employee>
+            List<Employee> Data = new List<Employee>
             {
                 new Employee { Id = 1, Name= "Name 1", StartDate = new DateTime(2000, 10, 4)},
                 new Employee { Id = 2, Name= "Name 2", StartDate = new DateTime(2012, 5, 29)} ,
@@ -41,6 +41,9 @@ namespace Linq
                                             where e.StartDate.Year < 2010
                                             orderby e.Name ascending
                                             select e;
+
+            //Example for differed execution with lazy operators 
+            Data.Add(new Employee { Id = 4, Name = "Name 4", StartDate = new DateTime(2001, 7, 15) });
 
             foreach (Employee m in details)
             {
