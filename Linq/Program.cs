@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Linq
 {
@@ -11,8 +13,24 @@ namespace Linq
     {
         public static void Main(string[] args)
         {
-            GetEmployee();
+            //GetEmployee();
             //GetTypes();
+            QueryXML();
+        }
+
+
+        private static void QueryXML()
+        {
+            
+            //Accessing XML using LINQ
+            XDocument doc = new XDocument(
+                new XElement("Processes",
+                from p in Process.GetProcesses()
+                orderby p.ProcessName ascending
+                select new XElement("Process", new XAttribute( "Name", p.ProcessName), new XAttribute("ID", p.Id))));
+
+            Console.WriteLine(doc.Document.ToString());
+            Console.Read();
         }
 
         private static void GetTypes()
