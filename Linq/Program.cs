@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,25 @@ namespace Linq
     class Program
     {
         public static void Main(string[] args)
+        {
+            //GetEmployee();
+            GetTypes();
+        }
+
+        private static void GetTypes()
+        {
+            //Linq to Objects 
+            IEnumerable<string> types = from t in Assembly.GetExecutingAssembly().GetTypes()
+                                        where t.IsPublic
+                                        select t.FullName;
+
+            foreach(string c in types)
+            {
+                Console.WriteLine(c);
+            }
+        }
+
+        private static void GetEmployee()
         {
             IEnumerable<Employee> Data = new List<Employee>
             {
@@ -22,15 +42,14 @@ namespace Linq
                                             orderby e.Name ascending
                                             select e;
 
-            foreach(Employee m in details)
+            foreach (Employee m in details)
             {
-                Console.WriteLine("The details got from database are {0}, {1}. {2}", m.Id,m.Name,m.StartDate.Year);
+                Console.WriteLine("The details got from database are {0}, {1}. {2}", m.Id, m.Name, m.StartDate.Year);
             }
 
             Console.ReadLine();
         }
 
-        
 
     }
 }
