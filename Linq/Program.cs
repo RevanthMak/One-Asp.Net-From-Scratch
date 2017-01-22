@@ -29,7 +29,19 @@ namespace Linq
                 orderby p.ProcessName ascending
                 select new XElement("Process", new XAttribute( "Name", p.ProcessName), new XAttribute("ID", p.Id))));
 
-            Console.WriteLine(doc.Document.ToString());
+            //Console.WriteLine(doc.Document.ToString());
+            //Console.Read();
+
+            //Querying XML
+            IEnumerable<int> docdata = from e in doc.Descendants("Process")
+                                       where e.Attribute("Name").Value == "devenv"
+                                       orderby (int)e.Attribute("ID") ascending
+                                       select (int)e.Attribute("ID");
+
+            foreach(int i in docdata)
+            {
+                Console.WriteLine(i);
+            }
             Console.Read();
         }
 
