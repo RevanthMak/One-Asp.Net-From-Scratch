@@ -15,9 +15,29 @@ namespace Linq
         {
             //GetEmployee();
             //GetTypes();
-            QueryXML();
+            //QueryXML();
+            SimpleEmployeeQueries();
         }
 
+        private static void SimpleEmployeeQueries()
+        {
+            var result =
+                from e in new EmployeeRepo().GetAll()
+                where e.Id < 3
+                orderby e.Id ascending, e.Name descending
+                select e;
+
+            print(result);
+
+        }
+
+        static void print(IEnumerable<Employee> x )
+        {
+            foreach(Employee emp in x)
+            {
+                Console.WriteLine(emp.Name);
+            }
+        }
 
         private static void QueryXML()
         {
