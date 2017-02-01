@@ -21,14 +21,24 @@ namespace Linq
 
         private static void SimpleEmployeeQueries()
         {
+            //Comprehension Query 
             var result =
                 from e in new EmployeeRepo().GetAll()
                 where e.Id < 3
                 orderby e.Id ascending, e.Name descending
                 select e;
 
-            print(result);
+            //Extension Method Query
+            var result2 =
+                new EmployeeRepo().GetAll()
+                    .Where(e => e.Id < 3)
+                    .OrderByDescending(e => e.Id)
+                    .OrderBy(e => e.Name); 
+                    
 
+            print(result);
+            print(result2);
+            Console.ReadLine();
         }
 
         static void print(IEnumerable<Employee> x )
