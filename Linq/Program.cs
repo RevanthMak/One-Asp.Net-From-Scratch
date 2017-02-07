@@ -15,7 +15,36 @@ namespace Linq
             //GetTypes();
             //QueryXML();
             //SimpleEmployeeQueries();
-            ExampleOfSelectMany();
+            //ExampleOfSelectMany();
+            JoinsExample();
+        }
+
+        private static void JoinsExample()
+        {
+
+            var Employees = new List<Employee>
+        {
+            new Employee {Id = 101, Name = "Name 1", StartDate = DateTime.Today },
+            new Employee {Id = 102, Name = "Name 2", StartDate = DateTime.Now },
+            new Employee {Id = 103, Name ="Name 3", StartDate = DateTime.UtcNow }
+        };
+
+            var Departments = new List<Department>
+        {
+            new Department {Id=101, Name = "Depart 1" },
+            new Department {Id = 102, Name = "Depart 2" },
+            new Department {Id = 103, Name = "Depart 3" }
+
+        };
+
+            var query =
+                from d in Departments
+                join e in Employees on d.Id equals e.Id
+                select new
+                {
+                    DepartmentId = d.Id,
+                    EmployeeName = e.Name
+                };
         }
 
         private static void ExampleOfSelectMany()
