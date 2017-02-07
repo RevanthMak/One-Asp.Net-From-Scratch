@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Linq
@@ -16,7 +14,28 @@ namespace Linq
             //GetEmployee();
             //GetTypes();
             //QueryXML();
-            SimpleEmployeeQueries();
+            //SimpleEmployeeQueries();
+            ExampleOfSelectMany();
+        }
+
+        private static void ExampleOfSelectMany()
+        {
+            string[] x =
+            {
+                "X is an example of y", 
+                "X is not the real number it's just a character"
+            };
+
+            var Output = (from data in x
+                          from word in data.Split(' ')
+                          select word
+                           ).Distinct();
+
+            foreach(var v in Output)
+            {
+                Console.WriteLine(v);
+            }
+            Console.ReadLine();
         }
 
         private static void SimpleEmployeeQueries()
@@ -33,9 +52,8 @@ namespace Linq
                 new EmployeeRepo().GetAll()
                     .Where(e => e.Id < 3)
                     .OrderByDescending(e => e.Id)
-                    .OrderBy(e => e.Name); 
-                    
-
+                    .OrderBy(e => e.Name);
+            
             print(result);
             print(result2);
             Console.ReadLine();
