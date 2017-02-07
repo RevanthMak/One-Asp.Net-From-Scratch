@@ -31,11 +31,10 @@ namespace Linq
                           select word
                            ).Distinct();
 
-            foreach(var v in Output)
-            {
-                Console.WriteLine(v);
-            }
-            Console.ReadLine();
+            //Look for the difference
+            var Output2 = x.Select(p => p.Split(' ').Distinct());
+            var Output3 = x.SelectMany(p => p.Split(' ').Distinct());
+
         }
 
         private static void SimpleEmployeeQueries()
