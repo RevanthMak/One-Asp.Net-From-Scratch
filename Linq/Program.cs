@@ -47,15 +47,16 @@ namespace Linq
                 };
 
             //Extension Method Syntax
+            //Group Join 
             var query2 =
-                Departments.Join(
+                Departments.GroupJoin(
                     Employees,
                     e => e.Id,
                     d => d.Id,
-                    (e, d) => new
+                    (eg, d) => new
                     {
-                        DepartmentId = d.Id, 
-                        EmployeeName = e.Name
+                        DepartmentId = d, 
+                        EmployeeName = eg
                     }
                     );
 
