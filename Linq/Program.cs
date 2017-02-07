@@ -60,6 +60,17 @@ namespace Linq
                     }
                     );
 
+            var query3 =
+                from d in Departments
+                join e in Employees on d.Id equals e.Id
+                into eg
+                select new
+                {
+                    DepartmentId = d.Id,
+                    EmployeeName = eg
+
+                };
+
              
         }
 
