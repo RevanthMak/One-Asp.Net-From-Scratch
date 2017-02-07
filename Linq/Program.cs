@@ -33,7 +33,7 @@ namespace Linq
         {
             new Department {Id=101, Name = "Depart 1" },
             new Department {Id = 102, Name = "Depart 2" },
-            new Department {Id = 103, Name = "Depart 3" }
+            new Department {Id = 104, Name = "Depart 3" }
 
         };
 
@@ -45,6 +45,21 @@ namespace Linq
                     DepartmentId = d.Id,
                     EmployeeName = e.Name
                 };
+
+            //Extension Method Syntax
+            var query2 =
+                Departments.Join(
+                    Employees,
+                    e => e.Id,
+                    d => d.Id,
+                    (e, d) => new
+                    {
+                        DepartmentId = d.Id, 
+                        EmployeeName = e.Name
+                    }
+                    );
+
+             
         }
 
         private static void ExampleOfSelectMany()
